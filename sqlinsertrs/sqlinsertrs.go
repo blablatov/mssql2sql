@@ -7,11 +7,7 @@ import (
 	"log"
 )
 
-const (
-	insertIntegrTableSql = "INSERT InsertNameTable SELECT Id, Discriminator, Name, BusinessUnit, ItemNumber, ItemName FROM SelectNameTable WHERE BusinessUnit = 65;"
-)
-
-func SqlInserTrs(db *sql.DB, cs chan string) {
+func SqlInserTrs(insertIntegrTableSql string, db *sql.DB, cs chan string) {
 	// Начало транзакции
 	tx, err := db.Begin()
 	if err != nil {
