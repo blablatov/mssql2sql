@@ -1,6 +1,6 @@
 // Демо MSSQL-модуль формирования DSN и создания подключения к СУБД.
 
-package main
+package sqlmain
 
 import (
 	"database/sql"
@@ -13,6 +13,14 @@ import (
 	"time"
 
 	mssql "github.com/denisenkom/go-mssqldb"
+)
+
+type Dsner interface {
+	SqlDsn()
+}
+
+const (
+	insertIntegrTableSql = "INSERT InsertNameTable SELECT Id, Discriminator, Name, BusinessUnit, ItemNumber, ItemName FROM SelectNameTable WHERE BusinessUnit = 65;"
 )
 
 var (
@@ -46,6 +54,10 @@ func makeConnURL() *url.URL {
 }
 
 func main() {
+	SqlDsn()
+}
+
+func SqlDsn() {
 	connString := fmt.Sprintf("server=%s;user id=%s;password=%s;port=%d;database=%s", *server, *user, *password, *port, *database)
 	if *debug {
 		fmt.Printf("connString:%s\n", connString)
@@ -70,7 +82,7 @@ func main() {
 
 	cs := make(chan string) // канал функции sqlinsert-запроса
 	start := time.Now()
-	go sqlinsertrs.SqlInserTrs(db, cs)
+	go sqlinsertrs.SqlInserTrs(insertIntegrTableSql, db, cs)
 	log.Println("\n\nРезультат sql-запроса: ", <-cs) // Получение данных запроса из канала горутины
 	secs := time.Since(start).Seconds()
 	fmt.Printf("%.2fs время выполнения запроса\n", secs)
