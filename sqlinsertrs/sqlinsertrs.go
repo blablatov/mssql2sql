@@ -21,7 +21,7 @@ func SqlInserTrs(insertIntegrTableSql string, db *sql.DB, cs chan string) {
 		log.Fatal(err)
 	}
 	defer stmt.Close() // Prepared statements take up server resources and should be closed after use
-	// Выполненые операторы занимают ресурсы серверы и должны быть закрыты, после выполнения.
+	// Выполненые операторы занимают ресурсы сервера и должны быть закрыты, после выполнения.
 
 	if _, err := stmt.Exec("open source"); err != nil {
 		log.Fatal(err)
