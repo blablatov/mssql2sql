@@ -1,9 +1,9 @@
-### soap2drxrest
+### mssql2sql
 ## On Russian
 
 Демо модули MSSQL для копирования данных между таблицами СУБД.
 
-Запустить модуль sqlmain.
+> Запустить модуль mssqlmain.
 
 Проверить появление данных в реципиент-таблице.
 
@@ -11,5 +11,5 @@
 
 It's demo modules of  MSSQL for copying data between DBMS tables.
 
-You should run module sqlmain and check is new data in recipient-table.
+> You should run module mssqlmain and check is new data in recipient-table.
 
